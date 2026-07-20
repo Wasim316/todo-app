@@ -39,8 +39,10 @@ const login =async(req,res)=>{
             ) 
         res.cookie("token", jwtToken,{
             httpOnly : true,
-            sameSite: "lax",
-            secure: false,
+            // sameSite: "lax",
+            // secure: false,
+            sameSite: "none",
+            secure: true,
             maxAge: 24 * 60 * 60 * 1000
         })
         res.json({success:true, name:user.name, id: user._id, jwtToken})
@@ -54,8 +56,10 @@ const logout =async(req,res)=>{
     try{ 
         res.clearCookie("token",{
             httpOnly : true,
-            sameSite: "lax",
-            secure: false,
+            // sameSite: "lax",
+            // secure: false,
+            sameSite: "none",
+            secure: true,
         })
         res.json({success:true})
 
