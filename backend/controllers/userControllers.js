@@ -4,8 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const signup = async(req,res)=>{
     try{
-        // console.log(req.body)
-        const newUser = await User.findOne({id:req.body.id});
+        const newUser = await User.findOne({email:req.body.email});
         if(!newUser){
             const newUserInserted = await User.insertOne({
                 name: req.body.name,
