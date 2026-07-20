@@ -32,6 +32,9 @@ const Todo = ({itemsInfo}) => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${id}`,{
       credentials: "include",
       method : 'DELETE',
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     });
     const result = await response.json();
     if(result.success){

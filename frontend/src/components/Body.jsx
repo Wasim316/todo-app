@@ -17,6 +17,7 @@ const Body = () => {
             method : 'POST',
             credentials: "include",
             headers :{
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
                 'Content-Type' : 'application/json'
             },
             body : JSON.stringify(itemsUpdated)

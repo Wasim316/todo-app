@@ -12,6 +12,7 @@ const Edit = ({item, editData, fetchTodos, editId}) => {
             method : 'PATCH',
             credentials: "include",
             headers : {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
                 'Content-Type' : 'application/json'
             },
             body : JSON.stringify(editedData)

@@ -14,6 +14,7 @@ const Login = () => {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/user/login`,{
             method: "POST",
             headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
                 'Content-Type' : 'application/json'
             },
             credentials: "include",

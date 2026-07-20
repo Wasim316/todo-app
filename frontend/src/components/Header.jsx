@@ -7,7 +7,10 @@ const Header = () => {
   const handleLogout = async()=>{
     const response = await fetch(`${import.meta.env.VITE_API_URL}/user/logout`,{
       method: 'POST',
-      credentials : 'include'
+      credentials : 'include',
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     });
     const result = await response.json()
     if(result.success){
