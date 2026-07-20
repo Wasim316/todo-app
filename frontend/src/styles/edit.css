@@ -1,0 +1,16 @@
+.edit-box{
+    /* border: 1px solid black; */
+    display: flex;
+    height: 2rem;
+    box-shadow: 0px 0px 15px 5px rgba(132, 134, 133, 0.6);
+}
+
+.input-box{
+    border: 1px solid black;
+    width: 40%;
+}
+
+.description-box{
+    border: 1px solid black;
+    width: 90%;
+}

@@ -1,0 +1,13 @@
+.signup-box{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: 10% auto;
+    gap: 10px;
+     box-shadow: 0px 4px 10px gray;
+}
+
+.signup-items{
+    margin: 5px;
+}

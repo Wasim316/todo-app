@@ -1,0 +1,38 @@
+.todo-box{
+    /* border: 1px solid black; */
+    display: flex;
+    height: 2rem;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.input-box{
+    border: 1px solid black;
+    width: 40%;
+}
+
+.description-box{
+    border: 1px solid black;
+    width: 90%;
+}
+
+.button-box{
+    border: 1px solid black;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.edit-btn{
+    padding: 0px 3px;
+}
+
+.delete-btn{
+    padding: 0px 3px;
+}
+
+.done-btn{
+    padding: 0px 3px;
+}
+
