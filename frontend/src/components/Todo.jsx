@@ -10,8 +10,14 @@ const Todo = ({itemsInfo}) => {
 
   const fetchTodos = async () => {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/todos`,{
-      credentials: "include"
+      credentials: "include",
+      headers:{
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      }
     });
+    //
+    //
+    //
     const result = await response.json();
     if (result.success) {
       setItemInfo(result.data);
