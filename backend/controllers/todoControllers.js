@@ -29,7 +29,7 @@ const getAllData = async(req,res)=>{
 
 const deleteOneData = async(req,res)=>{
     try{
-        await Todo.findOneAndDelete(req.params.id)
+        await Todo.findOneAndDelete({id:req.params.id})
         res.json({success:true})
     }catch(error){
         console.log(error)
