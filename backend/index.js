@@ -9,6 +9,7 @@ const bodyParser = require('body-parser')
 const dns = require("node:dns");
 const router = require('./routes/todoRoutes');
 const userRoutes = require('./routes/userRouter');
+const agentRoutes = require('./routes/agentRoutes');
 
 app.use(express.json())
 app.use(bodyParser.json())
@@ -35,6 +36,9 @@ dbConnection();
 
 app.use('/todos',router)
 app.use('/user',userRoutes)
+
+//ai agent
+app.use('/agent',agentRoutes)
 
 app.listen(port, ()=>{
     console.log(`app is listening to port ${port} `)

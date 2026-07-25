@@ -8,7 +8,26 @@ const Body = () => {
     const[descriptionInfo, setDescriptionInfo] = useState("");
     const[itemInfo, setItemInfo] = useState([]);
 
+// ai agent
+    const[textareaInfo, setTextareaInfo] = useState('')
+
     const userName = (localStorage.getItem('name'))
+
+// ai agent
+    const handleSubmit = async()=>{
+        const itemsUpdated = {id:uuidv4(), textareaInfo:textareaInfo, textBol: false}
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/agent`,{
+            method:'POST',
+            credentials:'include',
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                'Content-Type' : 'application/json',
+            },
+            body: JSON.stringify(itemsUpdated)
+        })
+    }
+// ai agent 
+
 
     const handleAddItem = async()=>{
         const itemsUpdated = {id:uuidv4(), title:titleInfo, description:descriptionInfo, textBol: false}
@@ -33,6 +52,10 @@ const Body = () => {
   return (
     <div className="body-box">
         <h2>Hello, {userName}</h2>
+        <div className='agent'>
+            <textarea rows={5} placeholder='write your todo' value={textareaInfo} onChange={(e)=>setTextareaInfo(e.target.value)}></textarea>
+            <button onClick={handleSubmit}>submit</button>
+        </div>
         <div className='add-todo'>
             <input placeholder='write your todo'value={titleInfo} onChange={(e)=>setTitleInfo(e.target.value)}/>
             <textarea placeholder='write description for your todo' value={descriptionInfo} onChange={(e)=>setDescriptionInfo(e.target.value)}></textarea>
