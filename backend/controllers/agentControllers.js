@@ -20,6 +20,36 @@ async function postingData({id, title, description, textBol, userId}){
         console.log(newTodo)
 }
 
+
+async function deleteData({title}){
+    console.log(title)
+    try{
+        const deleteTodo = await Todo.findOneAndDelete({title : title})
+        console.log("deleteTodo",deleteTodo)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+const deleteDataDeclaration = {
+    name : "deleteData",
+    description : 'Get title, description',
+    parameters : {
+        type : 'object',
+        properties : {
+            title : {
+                type : 'string',
+                description : 'It will be TITLE that will be formed from the input coming from textareaInfo written after delete or Delete word'
+            },
+            // description:{
+            //     type : 'string',
+            //     description : 'It will be DESCRIPTION that will be formed from the input coming from textareaInfo'
+            // }
+        },
+        required : ['title']
+    }
+}
+
 const postingDataDeclaration = {
     name : 'postingData',
     description : 'Get id, title, description, textBol, userId',
@@ -51,7 +81,7 @@ const postingDataDeclaration = {
     }
 }
 
-const availableTools = {postingData:postingData}
+const availableTools = {postingData:postingData, deleteData:deleteData}
 const History = []
 
 async function agentRun(id, textareaInfo,textBol, userId){
@@ -71,7 +101,8 @@ async function agentRun(id, textareaInfo,textBol, userId){
         contents : History,
         config: {
             systemInstruction :  `
-You must ALWAYS call the postingData function if needed.
+You must call the postingData function if needed.
+And also you must call deleteData function if you see delete in the content.
 Extract title and description from content.
 Pass id, userId and textBol exactly as provided.
 Do not answer any random question.
@@ -79,7 +110,7 @@ Do not answer any random question.
         ,
         
         tools : [{
-            functionDeclarations : [postingDataDeclaration]
+            functionDeclarations : [postingDataDeclaration, deleteDataDeclaration]
         }]
     }
     })
