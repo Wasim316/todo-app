@@ -7,7 +7,9 @@ const Body = () => {
     const[titleInfo, setTitleInfo] = useState("");
     const[descriptionInfo, setDescriptionInfo] = useState("");
     const[itemInfo, setItemInfo] = useState([]);
-
+    const[check, setCheck] = useState(false)
+    const[refresh, setRefresh] = useState(1)
+ 
 // ai agent
     const[textareaInfo, setTextareaInfo] = useState('')
 
@@ -15,6 +17,7 @@ const Body = () => {
 
 // ai agent
     const handleSubmit = async()=>{
+        setCheck(true)
         const itemsUpdated = {id:uuidv4(), textareaInfo:textareaInfo, textBol: false}
         const response = await fetch(`${import.meta.env.VITE_API_URL}/agent`,{
             method:'POST',
@@ -25,9 +28,16 @@ const Body = () => {
             },
             body: JSON.stringify(itemsUpdated)
         })
+        const result = await response.json()
+        console.log(result)
+        if(result.success){
+            setRefresh(refresh+1)
+            setCheck(false)
+            setTextareaInfo("")
+        }
+        
     }
 // ai agent 
-
 
     const handleAddItem = async()=>{
         const itemsUpdated = {id:uuidv4(), title:titleInfo, description:descriptionInfo, textBol: false}
@@ -54,7 +64,7 @@ const Body = () => {
         <h2>Hello, {userName}</h2>
         <div className='agent'>
             <textarea rows={5} placeholder='write your todo' value={textareaInfo} onChange={(e)=>setTextareaInfo(e.target.value)}></textarea>
-            <button onClick={handleSubmit}>submit</button>
+            <button onClick={handleSubmit}>{check ? "submitting...." : "submit"}</button>
         </div>
         <div className='add-todo'>
             <input placeholder='write your todo'value={titleInfo} onChange={(e)=>setTitleInfo(e.target.value)}/>
@@ -62,7 +72,7 @@ const Body = () => {
             <button onClick={handleAddItem}>add</button>
         </div>
 
-        <Todo itemsInfo = {itemInfo}/>
+        <Todo itemsInfo = {itemInfo} refresh={refresh}/>
     </div>
   )
 }

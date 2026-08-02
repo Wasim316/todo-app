@@ -4,7 +4,7 @@ import { useState } from "react";
 import Edit from "./Edit";
 import { Fragment } from "react";
 
-const Todo = ({itemsInfo}) => {
+const Todo = ({itemsInfo, refresh}) => {
   const [itemInfo, setItemInfo] = useState([]);
   const [editId, setEditId] = useState(null);
 
@@ -26,7 +26,7 @@ const Todo = ({itemsInfo}) => {
 
   useEffect(() => {
     fetchTodos();
-  }, [itemsInfo]);
+  }, [itemsInfo, refresh]);
 
   const handleDelete = async(id)=>{
     const response = await fetch(`${import.meta.env.VITE_API_URL}/todos/${id}`,{
