@@ -1,5 +1,11 @@
 .body-box{
-    margin: 1rem;
+    margin-top: 8rem;
+    /* margin: 1rem; */
+}
+
+.agent{
+    display: flex;
+    gap: 2rem;
 }
 
 .add-todo{
@@ -13,4 +19,16 @@
 
 .agent textarea{
     width: 30%;
+}
+
+.textarea-button{
+    height: 3rem;
+    width: 5rem;
+    border: none;
+    border-radius: 1rem;
+    background-color: rgb(98, 98, 250);
+}
+
+.textarea-button:hover{
+    background-color: blue;
 }

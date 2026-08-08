@@ -38,7 +38,7 @@ const Login = () => {
         
         <input placeholder='password' className='login-items' value={password} onChange={(e)=>setPassword(e.target.value)}/>
         
-        <button className='login-items' onClick={handleLoginSubmit}>{login ? 'Submitting...' : 'Submit' }</button>
+        <button className='login-items login-button' onClick={handleLoginSubmit}>{login ? 'Submitting...' : 'Submit' }</button>
 
         <p>Don't have an account ? <span><Link to='/'>Signup</Link></span></p>
     </div>

@@ -20,6 +20,7 @@ const Signup = () => {
         const result = await response.json()
         if(result.success){
             console.log(result.data)
+            setUserInfo(...updatedUserInfo)
             navigate('/login')
         }
     }
@@ -33,7 +34,7 @@ const Signup = () => {
         
         <input placeholder='password' className='signup-items' value={password} onChange={(e)=>setPassword(e.target.value)}/>
         
-        <button className='signup-items' onClick={handleSubmit}>Submit</button>
+        <button className='signup-items signup-button' onClick={handleSubmit}>Submit</button>
 
         <p>Already have an account ? <span><Link to='/login'>Login</Link></span></p>
     </div>

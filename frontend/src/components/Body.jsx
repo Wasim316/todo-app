@@ -63,8 +63,8 @@ const Body = () => {
     <div className="body-box">
         <h2>Hello, {userName}</h2>
         <div className='agent'>
-            <textarea rows={5} placeholder='write your todo' value={textareaInfo} onChange={(e)=>setTextareaInfo(e.target.value)}></textarea>
-            <button onClick={handleSubmit}>{check ? "submitting...." : "submit"}</button>
+            <textarea rows={5} placeholder='You can also Create and Delete your todo from here!!' value={textareaInfo} onChange={(e)=>setTextareaInfo(e.target.value)}></textarea>
+            <button className='textarea-button' onClick={handleSubmit}>{check ? "submitting...." : "submit"}</button>
         </div>
         <div className='add-todo'>
             <input placeholder='write your todo'value={titleInfo} onChange={(e)=>setTitleInfo(e.target.value)}/>

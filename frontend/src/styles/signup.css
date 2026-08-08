@@ -11,3 +11,13 @@
 .signup-items{
     margin: 5px;
 }
+
+.signup-button{
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(70, 70, 247);
+}
+
+.signup-button:hover{
+    background-color: blue;
+}
