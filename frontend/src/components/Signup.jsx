@@ -20,11 +20,12 @@ const Signup = () => {
         });
         const result = await response.json()
         if(result.success){
-            console.log(result.data)
-            console.log(result.message)
+            // console.log(result.data)
+            // console.log(result.message)
             toast.success(result.message)
-            setUserInfo(...updatedUserInfo)
-            navigate('/login')
+            setUserInfo(updatedUserInfo)
+            setTimeout(()=>{navigate('/login')},1000)
+            // navigate('/login')
         }
         else{
             console.log(result.message)
