@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import '../styles/signup.css'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
     const navigate = useNavigate()
@@ -20,8 +21,14 @@ const Signup = () => {
         const result = await response.json()
         if(result.success){
             console.log(result.data)
+            console.log(result.message)
+            toast.success(result.message)
             setUserInfo(...updatedUserInfo)
             navigate('/login')
+        }
+        else{
+            console.log(result.message)
+            toast.error(result.message)
         }
     }
     

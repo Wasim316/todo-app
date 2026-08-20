@@ -6,6 +6,9 @@ import {BrowserRouter,Routes, Route, Navigate} from 'react-router-dom'
 import Signup from './components/Signup.jsx'
 import Login from './components/Login.jsx'
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
 
@@ -36,6 +39,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/login/*' element={<PublicRoute> <Login/> </PublicRoute>}/>
       </Routes>
       {/* <App /> */}
+      <ToastContainer/>
     </BrowserRouter>
     
   </StrictMode>,
