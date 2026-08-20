@@ -1,24 +1,42 @@
 const mongoos = require('mongoose')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const { userSchemaValidation } = require('../middlewares/userValidation')
 
 const signup = async(req,res)=>{
     try{
-        const newUser = await User.findOne({email:req.body.email});
+        //Validate request body
+        const {error, value} = userSchemaValidation.validate(req.body)
+
+        if(error){
+            res.status(400).json({
+                success: false, message: error.details[0].message
+            })
+        }
+
+        //Use the validated/cleaned data
+        const {name, email, password} = value
+
+        //Check whether email is already exists
+
+        const newUser = await User.findOne({email});
+
+        //If email not present add the user
         if(!newUser){
             const newUserInserted = await User.insertOne({
-                name: req.body.name,
-                email: req.body.email,
-                password: req.body.password
+                name,
+                email,
+                password
             })
-            console.log(newUserInserted)
-            res.json({success: true, data:newUserInserted})
+            // console.log(newUserInserted)
+            res.send(200).json({success: true, data:newUserInserted, message: "Sign up success"})
         }else{
-            res.json({success:false})
+            res.status(409).json({success:false, message:"User already exists"})
         }
         
     }catch(err){
-        console.log('data not inserted : ',err)
+        // console.log('data not inserted : ',err)
+        res.send(500).json({success:false, message: "Internal server error"})
     } 
 }
 
