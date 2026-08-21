@@ -10,7 +10,7 @@ const signup = async(req,res)=>{
         const {error, value} = userSchemaValidation.validate(req.body)
 
         if(error){
-            return res.status(400).json({
+            res.status(400).json({
                 success: false, message: error.details[0].message
             })
         }
@@ -30,7 +30,7 @@ const signup = async(req,res)=>{
                 password
             })
             // console.log(newUserInserted)
-            res.status(200).json({success: true, data:newUserInserted, message: "Sign up success"})
+            res.send(200).json({success: true, data:newUserInserted, message: "Sign up success"})
         }else{
             res.status(409).json({success:false, message:"User already exists"})
         }
