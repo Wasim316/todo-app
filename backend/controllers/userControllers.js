@@ -10,7 +10,7 @@ const signup = async(req,res)=>{
         const {error, value} = userSchemaValidation.validate(req.body)
 
         if(error){
-            res.status(400).json({
+            return res.status(400).json({
                 success: false, message: error.details[0].message
             })
         }
@@ -30,14 +30,14 @@ const signup = async(req,res)=>{
                 password
             })
             // console.log(newUserInserted)
-            res.send(200).json({success: true, data:newUserInserted, message: "Sign up success"})
+            return res.status(200).json({success: true, data:newUserInserted, message: "Sign up success"})
         }else{
-            res.status(409).json({success:false, message:"User already exists"})
+            return res.status(409).json({success:false, message:"User already exists"})
         }
         
     }catch(err){
         // console.log('data not inserted : ',err)
-        res.send(500).json({success:false, message: "Internal server error. Please try again!!"})
+        return res.status(500).json({success:false, message: "Internal server error. Please try again!!"})
     } 
 }
 
@@ -45,7 +45,7 @@ const login =async(req,res)=>{
     try{
         const {error, value} = userLoginValidation.validate(req.body)
         if(error){
-            res.status(400).json({
+            return res.status(400).json({
                 success: false, message: error.details[0].message
             })
         }
@@ -81,11 +81,11 @@ const login =async(req,res)=>{
             secure: true,
             maxAge: 24 * 60 * 60 * 1000
         })
-        res.status(200).json({success:true, name:user.name, id: user._id, jwtToken, message: "logged in successfully"})
+        return res.status(200).json({success:true, name:user.name, id: user._id, jwtToken, message: "logged in successfully"})
 
     }catch(err){
         // console.log(err)
-        res.status(500).json({success:false, message: "Internal server error. Please try again"})
+        return res.status(500).json({success:false, message: "Internal server error. Please try again"})
     }
 }
 
