@@ -9,7 +9,7 @@ const signup = async(req,res)=>{
         const {error, value} = userSchemaValidation.validate(req.body)
 
         if(error){
-            res.status(400).json({
+            return res.status(400).json({
                 success: false, message: error.details[0].message
             })
         }
@@ -29,14 +29,14 @@ const signup = async(req,res)=>{
                 password
             })
             // console.log(newUserInserted)
-            res.send(200).json({success: true, data:newUserInserted, message: "Sign up success"})
+            res.status(200).json({success: true, data:newUserInserted, message: "Sign up success"})
         }else{
             res.status(409).json({success:false, message:"User already exists"})
         }
         
     }catch(err){
         // console.log('data not inserted : ',err)
-        res.send(500).json({success:false, message: "Internal server error"})
+        res.status(500).json({success:false, message: "Internal server error"})
     } 
 }
 
