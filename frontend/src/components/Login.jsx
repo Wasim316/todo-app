@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import '../styles/login.css'
 import { useState } from "react"
+import { toast } from 'react-toastify'
 
 
 const Login = () => {
@@ -24,12 +25,16 @@ const Login = () => {
         })
         const result = await response.json()
         if(result.success){
-            console.log(result.jwtToken)
+            // console.log(result.jwtToken)
             setLoginInfo(updatedLoginInfo)
             setLogin(false)
             localStorage.setItem("token", result.jwtToken)
             localStorage.setItem("name", result.name)
+            toast.success(result.message)
             navigate('/app')
+        }
+        else{
+            toast.error(result.message)
         }
     }
   return (

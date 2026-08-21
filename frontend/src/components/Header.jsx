@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import '../styles/header.css'
+import { toast } from 'react-toastify'
 
 const Header = () => {
   const navigate = useNavigate()
@@ -16,7 +17,12 @@ const Header = () => {
     if(result.success){
       localStorage.removeItem('token')
       localStorage.removeItem('name')
-      navigate('/login')
+      toast.success(result.message)
+      setTimeout(()=>{navigate('/login')},1000)
+      // navigate('/login')
+    }
+    else{
+      toast.error(result.message)
     }
   }
   return (

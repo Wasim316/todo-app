@@ -20,14 +20,14 @@ const Signup = () => {
         });
         const result = await response.json()
         if(result.success){
-            console.log(result.data)
-            console.log(result.message)
+            // console.log(result.data)
+            // console.log(result.message)
             toast.success(result.message)
             setUserInfo(...updatedUserInfo)
             navigate('/login')
         }
         else{
-            console.log(result.message)
+            // console.log(result.message)
             toast.error(result.message)
         }
     }
