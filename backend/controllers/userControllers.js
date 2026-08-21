@@ -38,7 +38,6 @@ const signup = async(req,res)=>{
     }catch(err){
         // console.log('data not inserted : ',err)
         res.send(500).json({success:false, message: "Internal server error. Please try again!!"})
-        res.status(500).json({success:false, message: "Internal server error"})
     } 
 }
 
