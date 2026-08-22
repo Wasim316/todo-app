@@ -3,6 +3,7 @@ import "../styles/todo.css";
 import { useState } from "react";
 import Edit from "./Edit";
 import { Fragment } from "react";
+import { toast } from 'react-toastify'
 
 const Todo = ({itemsInfo, refresh}) => {
   const [itemInfo, setItemInfo] = useState([]);
@@ -39,6 +40,8 @@ const Todo = ({itemsInfo, refresh}) => {
     const result = await response.json();
     if(result.success){
       const updatedItems = itemInfo.filter((item)=>item.id !== id)
+      // console.log(result.message)
+      toast.success(result.message)
       setItemInfo([...updatedItems])
     }
   }
@@ -53,7 +56,7 @@ const Todo = ({itemsInfo, refresh}) => {
 
   
   const onEditData = (obj)=>{
-      console.log(obj)
+      // console.log(obj)
       setItemInfo(prev => prev.map(item=> item.id === obj.id ?  { ...item, ...obj }: item))
       
   }
@@ -61,7 +64,7 @@ const Todo = ({itemsInfo, refresh}) => {
   const handleDone = (id)=>{
     setItemInfo(prev => prev.map(item=> item.id === id ?  { ...item, textBol: !item.textBol }: item))
       }
-  console.log(itemInfo)
+  // console.log(itemInfo)
 
   return (
     <div>

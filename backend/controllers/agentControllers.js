@@ -19,16 +19,16 @@ async function postingData({id, title, description, textBol, userId}){
             textBol : textBol,
             userId: userId
         });
-        console.log(newTodo)
+        // console.log(newTodo)
         
 }
 
 
 async function deleteData({title}){
-    console.log(title)
+    // console.log(title)
     try{
         const deleteTodo = await Todo.findOneAndDelete({title : title})
-        console.log("deleteTodo",deleteTodo)
+        // console.log("deleteTodo",deleteTodo)
         
     }catch(error){
         console.log(error)
@@ -93,8 +93,8 @@ const availableTools = {postingData:postingData, deleteData:deleteData}
 
 async function agentRun(id, textareaInfo,textBol, userId){
     const History = []
-    console.log("agent started")
-    console.log(id, textareaInfo,textBol, userId)
+    // console.log("agent started")
+    // console.log(id, textareaInfo,textBol, userId)
     History.push({
         role: 'user',
         parts :[{
@@ -112,7 +112,7 @@ async function agentRun(id, textareaInfo,textBol, userId){
     //   userId: ${userId}
     // `}]
     })
-    console.log("before gemini")
+    // console.log("before gemini")
     try{
     const response = await genAI.models.generateContent({
         model : 'gemini-3.5-flash-lite',
@@ -137,15 +137,15 @@ Rules:
         }]
     }
     })
-    console.log("after gemini")
-    console.log("object stated")
-    console.log("candidate: ",response.candidates[0].content)
-    console.log("function calls",response.functionCalls)
-    console.log("text",response.text)
+    // console.log("after gemini")
+    // console.log("object stated")
+    // console.log("candidate: ",response.candidates[0].content)
+    // console.log("function calls",response.functionCalls)
+    // console.log("text",response.text)
 
     
     if(response.functionCalls?.length > 0){
-        console.log(response.functionCalls);
+        // console.log(response.functionCalls);
         // const { name, args } = response.functionCalls[0]
         // const result = await availableTools[name](args)
         //  await availableTools[name](args)
@@ -191,6 +191,7 @@ Rules:
         //     role : 'user',
         //     parts : [{functionResponse}]
         // })
+        // console.log("res",response.candidates[0].content.parts[0].functionCall.name)
     }
     else{
         History.push({
@@ -203,17 +204,18 @@ Rules:
     `}]
         })
     }
-    console.log("response",response.text)
-    return {
-    success: true
-};
-    }catch(err){console.log(err)}
+    // console.log("response",response.text)
+    // console.log("response", response.functionCalls[0].name)
+    message = (response.functionCalls[0].name === 'postingData' ? "New Task Added" : "Task Deleted")
+    return {success: true,message:message};
+    }catch(err){
+        console.log(err)}
 }
 
 const postData = async(req,res)=>{
     try{
-        console.log("req body: ",req.body)
-        console.log("req user",req.user);
+        // console.log("req body: ",req.body)
+        // console.log("req user",req.user);
         const userId = req.user.id;
         const {id, textareaInfo,textBol} = req.body
         const result = await agentRun(id, textareaInfo,textBol, userId)

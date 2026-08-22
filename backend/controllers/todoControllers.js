@@ -10,7 +10,7 @@ const postData = async(req,res)=>{
             textBol : req.body.textBol,
             userId: req.user.id
         });
-        res.send({success : true, todo : newTodo})
+        res.send({success : true, todo : newTodo, message:"New Task Added"})
     }catch(err){
         console.log('data not inserted : ',err)
     } 
@@ -30,7 +30,7 @@ const getAllData = async(req,res)=>{
 const deleteOneData = async(req,res)=>{
     try{
         await Todo.findOneAndDelete({id:req.params.id})
-        res.json({success:true})
+        res.json({success:true, message:"Task deleted"})
     }catch(error){
         console.log(error)
     }
