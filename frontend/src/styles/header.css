@@ -2,11 +2,13 @@
     position: fixed;
     display: flex;
     justify-content: space-between;
-    background-color: rgb(17, 17, 17);
+    background-color: rgb(109, 122, 238);
     color: white;
     padding: 1rem;
-    width: 92%;
+    width: 95%;
 }
+
+
 
 .logout-btn{
     height: 3rem;

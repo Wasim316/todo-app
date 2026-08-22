@@ -203,7 +203,7 @@ Rules:
     `}]
         })
     }
-    console.log(response.text)
+    console.log("response",response.text)
     return {
     success: true
 };

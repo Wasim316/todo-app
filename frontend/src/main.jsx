@@ -39,7 +39,18 @@ createRoot(document.getElementById('root')).render(
         <Route path='/login/*' element={<PublicRoute> <Login/> </PublicRoute>}/>
       </Routes>
       {/* <App /> */}
-      <ToastContainer/>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </BrowserRouter>
     
   </StrictMode>,

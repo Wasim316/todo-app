@@ -37,7 +37,7 @@ const Body = () => {
         }
         
     }
-// ai agent 
+// ai agent //
 
     const handleAddItem = async()=>{
         const itemsUpdated = {id:uuidv4(), title:titleInfo, description:descriptionInfo, textBol: false}
@@ -61,9 +61,9 @@ const Body = () => {
     
   return (
     <div className="body-box">
-        <h2>Hello, {userName}</h2>
+        <h2>Hello, <span>{userName}😎</span></h2>
         <div className='agent'>
-            <textarea rows={5} placeholder='You can also Create and Delete your todo from here!!' value={textareaInfo} onChange={(e)=>setTextareaInfo(e.target.value)}></textarea>
+            <textarea className='textarea-agent' rows={5} placeholder='You can also Create and Delete your todo from here!! eg: delete <todo name>' value={textareaInfo} onChange={(e)=>setTextareaInfo(e.target.value)}></textarea>
             <button className='textarea-button' onClick={handleSubmit}>{check ? "submitting...." : "submit"}</button>
         </div>
         <div className='add-todo'>
